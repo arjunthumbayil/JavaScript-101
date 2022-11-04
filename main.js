@@ -1,14 +1,5 @@
-// what is a callback function in JS?
+//Deep about Event listeners
 
-setTimeout(function () {
-  console.log("Timer");
-}, 5000);
-
-function x(y) {
-  console.log("x");
-  y();
-}
-
-x(function y() {
-  console.log("y");
+document.getElementById("clickme").addEventListener("click", function xyz() {
+  console.log("Button clicked");
 });
