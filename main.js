@@ -1,19 +1,42 @@
-//Issues with setTimeout()
+// Higher order functions
+// Non functional non-modular way
 
-console.log("start");
+const radius = [1, 2, 3, 4];
 
-setTimeout(function cb() {
-  console.log("Callback");
-}, 5000);
+function calculateArea(input) {
+  let output = [];
+  for (let i = 0; i < input.length; i++) {
+    output.push(Math.PI * input[i] * input[i]);
+  }
+  return output;
+}
+console.log("Non-Functional " + calculateArea(radius));
 
-console.log("end");
+//Functional way
 
-//Simulating code execution to block the main thread
-
-let startTime = new Date().getTime();
-let endTime = startTime;
-while (endTime < startTime + 10000) {
-  endTime = new Date().getTime();
+function area(input) {
+  return Math.PI * input * input;
 }
 
-console.log("while expires");
+function calculate(input, logic) {
+  let output = [];
+  for (let i = 0; i < input.length; i++) {
+    output.push(logic(input[i]));
+  }
+
+  return output;
+}
+
+console.log("Functional " + calculate(radius, area));
+
+// Array.prototype way
+
+Array.prototype.calc = function calculate(logic) {
+  let output = [];
+  for (let i = 0; i < this.length; i++) {
+    output.push(logic(this[i]));
+  }
+  return output;
+};
+
+console.log("Array Prototype: " + radius.calc(area));
