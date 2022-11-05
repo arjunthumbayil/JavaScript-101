@@ -1,15 +1,17 @@
-//Closures with Event listeners
+//Issues with setTimeout()
 
-function attachEventListener() {
-  let count = 0;
+console.log("start");
 
-  document.getElementById("clickme").addEventListener("click", function xyz() {
-    console.log("Button clicked", ++count);
-  });
+setTimeout(function cb() {
+  console.log("Callback");
+}, 5000);
+
+console.log("end");
+
+//Simulating code execution to block the main thread
+
+let startTime = new Date().getTime();
+let endTime = startTime;
+while (endTime < startTime + 10000) {
+  endTime = new Date().getTime();
 }
-
-attachEventListener();
-
-//Scope with Event listeners
-
-//Garbage collections & removeEvenListeners
