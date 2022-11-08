@@ -1,42 +1,40 @@
-// Higher order functions
-// Non functional non-modular way
+// Reduce
 
-const radius = [1, 2, 3, 4];
+let users = [
+  { firstname: "fds", lastName: "b", dob: 1995 },
+  { firstname: "e", lastName: "fd", dob: 1998 },
+  { firstname: "ff", lastName: "gg", dob: 1993 },
+  { firstname: "u", lastName: "m", dob: 1994 },
+  { firstname: "d", lastName: "b", dob: 1995 },
+  { firstname: "ak", lastName: "aff", dob: 1997 },
+  { firstname: "rs", lastName: "fff", dob: 1997 },
+  { firstname: "r", lastName: "z", dob: 1992 },
+  { firstname: "dd", lastName: "p", dob: 1993 },
+  { firstname: "as", lastName: "r", dob: 1994 },
+  { firstname: "nd", lastName: "b", dob: 1997 },
+  { firstname: "ndd", lastName: "fb", dob: 1999 },
+  { firstname: "slu", lastName: "dsm", dob: 1996 },
+  { firstname: "du", lastName: "srm", dob: 1993 },
+];
+/* We need to have count of how many people where born in a particular year.
+Output should be of the form {1990:x, 1991:y, 1992:z, ....}
+where x,y,z are respective total counts of people having dob as the key year.
+ */
 
-function calculateArea(input) {
-  let output = [];
-  for (let i = 0; i < input.length; i++) {
-    output.push(Math.PI * input[i] * input[i]);
+// acc = {1990:x, 1991:y, 1992:z, ....};
+
+const output = users.reduce((acc, curr) => {
+  if (acc[curr.dob]) {
+    acc[curr.dob] = ++acc[curr.dob];
+  } else {
+    acc[curr.dob] = 1;
   }
-  return output;
-}
-console.log("Non-Functional " + calculateArea(radius));
 
-//Functional way
+  return acc;
+}, {});
 
-function area(input) {
-  return Math.PI * input * input;
-}
+console.log(output);
 
-function calculate(input, logic) {
-  let output = [];
-  for (let i = 0; i < input.length; i++) {
-    output.push(logic(input[i]));
-  }
+let outputTwo = users.reduce((acc, curr)=>({...acc, [curr.dob]:acc[curr.dob]+1||1}),{});
 
-  return output;
-}
-
-console.log("Functional " + calculate(radius, area));
-
-// Array.prototype way
-
-Array.prototype.calc = function calculate(logic) {
-  let output = [];
-  for (let i = 0; i < this.length; i++) {
-    output.push(logic(this[i]));
-  }
-  return output;
-};
-
-console.log("Array Prototype: " + radius.calc(area));
+console.log(outputTwo);
