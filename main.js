@@ -1,4 +1,4 @@
-//Polyfill for Reduce
+//Polyfill for Reduce new
 
 //Initial value can be provided
 //reduce the value to a particular element at each step, with result from previous step
