@@ -1,17 +1,21 @@
-//Polyfill for Map
+//Polyfill for Filter
 
+//Always returns a new array
+//Logic of for loop
+//Always checks for condition
 
-Array.prototype.myMap = function (callback) {
-  var output = [];
+Array.prototype.myFilter = function (callback) {
+  var newArray = [];
   for (var i = 1; i < this.length; i++) {
-    output.push(callback(this[i], i, this));
+    if (callback(this[i], i, this)) {
+      newArray.push(this[i]);
+    }
   }
-
-  return output;
+  return newArray;
 };
 
 var arr = [1, 2, 3, 4, 5];
 
-var output = arr.myMap((x) => x * 2);
+var output = arr.myFilter((x) => x > 2);
 
 console.log(output);
